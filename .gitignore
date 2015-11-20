@@ -1,0 +1,5 @@
+#python # python-cache
+*.pyc
+
+# mongodb data:
+mongodb_data/

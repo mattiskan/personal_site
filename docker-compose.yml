@@ -1,5 +1,7 @@
 db:
-  image: postgres
+  image: mongo:3.1
+  volumes:
+    - ./mongodb_data:/data/db
 web:
   build: .
   command: python manage.py runserver 0.0.0.0:8000

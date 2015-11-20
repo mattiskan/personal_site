@@ -1,3 +1,6 @@
+import mongoengine as db
 from django.db import models
 
-# Create your models here.
+class BlogEntry(db.Document):
+    title = db.StringField(max_length=50)
+    content = db.StringField()

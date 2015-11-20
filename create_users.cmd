@@ -12,7 +12,7 @@ db.createUser({
            ]
 });
 
-use testlol;
+use personal_site;
 db.createUser({
     user: "django",
     pwd: "a453d01f76d6d6c32de8c7e11243867d05ff7138",

@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-import sys
 
 import mongoengine
 
@@ -77,14 +76,14 @@ WSGI_APPLICATION = 'personal_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+MONGO_DATABASE_NAME = 'personal_site'
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.dummy'
+        'ENGINE': 'django.db.backends.dummy',
+        'NAME': MONGO_DATABASE_NAME,
     }
 }
-
-MONGO_DATABASE_NAME = 'personal_site' + '_test' if 'test' in sys.argv else ''
-
 
 mongoengine.connect(
     MONGO_DATABASE_NAME,
@@ -95,7 +94,6 @@ mongoengine.connect(
         db_name=MONGO_DATABASE_NAME
     )
 )
-
 
 
 #SESSION_ENGINE = 'mongoengine.django.sessions'

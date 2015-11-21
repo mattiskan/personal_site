@@ -1,3 +1,5 @@
 Django
 mongoengine
 ipdb
+pytest-django
+pyquery

@@ -5,9 +5,9 @@ from models import BlogEntry
 
 
 def index(request):
-    entries = '<br/>'. join(entry.title for entry in BlogEntry.objects)
+    entries = ''.join('<p class="blog-entry">' + entry.title + '</p>' for entry in BlogEntry.objects)
     
-    return HttpResponse("Hello world<br/>" + entries)
+    return HttpResponse(entries)
 
 
 def create(request):

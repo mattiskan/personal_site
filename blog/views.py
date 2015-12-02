@@ -5,9 +5,12 @@ from models import BlogEntry
 
 
 def index(request):
-    entries = ''.join('<p class="blog-entry">' + entry.title + '</p>' for entry in BlogEntry.objects)
+    entries = ''.join(
+        '<p class="blog-entry">' + entry.title + '</p>'
+        for entry in BlogEntry.objects.all()
+    )
     
-    return HttpResponse('<html>' + entries + '</html>')
+    return HttpResponse('<html><body>' + entries + '</body></html>')
 
 
 def create(request):

@@ -13,8 +13,6 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-import mongoengine
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -39,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blog',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -75,29 +74,16 @@ WSGI_APPLICATION = 'personal_site.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-MONGO_DATABASE_NAME = 'personal_site'
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.dummy',
-        'NAME': MONGO_DATABASE_NAME,
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432,
     }
 }
 
-mongoengine.connect(
-    MONGO_DATABASE_NAME,
-    host='mongodb://{username}:{password}@{host}/{db_name}'.format(
-        username='django',
-        password='a453d01f76d6d6c32de8c7e11243867d05ff7138',
-        host='db',
-        db_name=MONGO_DATABASE_NAME
-    )
-)
-
-
-#SESSION_ENGINE = 'mongoengine.django.sessions'
-#SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

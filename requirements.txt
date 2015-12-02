@@ -1,5 +1,4 @@
 Django
-mongoengine
+psycopg2
 ipdb
 pytest-django
-pyquery

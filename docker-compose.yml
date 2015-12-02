@@ -1,10 +1,10 @@
 db:
-  image: mongo:3.1
+  image: postgres
   volumes:
-    - /data/db
+    - /var/lib/postgresql
 web:
   build: .
-  command: python manage.py runserver 0.0.0.0:8000
+  command: sh -c "sleep 10 && python manage.py runserver 0.0.0.0:8000" # kind of janky to wait for db...
   volumes:
     - .:/code
   ports:

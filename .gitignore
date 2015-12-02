@@ -6,3 +6,6 @@ mongodb_data/
 
 # pytest
 .cache
+
+# emacs
+*~

@@ -2,7 +2,8 @@
 users_created_file="mongodb_data/_created_users"
 
 if [ ! -e $users_created_file ]; then
-    db_container_ip=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' "${PWD##*/}_db_1")
+    db_container=$(docker ps -q --filter "name=personal\_?site_db*")
+    db_container_ip=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $db_container)
 
     if [ -z $db_container_ip ]; then
         echo "Error: no container running database was found."

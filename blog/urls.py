@@ -1,4 +1,5 @@
 from django.conf.urls import include, url
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from views import index
 from api import EntryResource
@@ -11,3 +12,5 @@ urlpatterns = [
 
     url(r'^api/', include(entry_resource.urls)),
 ]
+
+urlpatterns += staticfiles_urlpatterns()

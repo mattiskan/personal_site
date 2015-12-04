@@ -8,4 +8,7 @@ class EntryResource(ModelResource):
         queryset = BlogEntry.objects.all()
         resource_name = 'entry'                    
 
-        serializer = XslSerializer(stylesheet=None)
+        serializer = XslSerializer(stylesheet='/blog/static/blog/blog_feed.xml')
+
+    def determine_format(self, request):
+        return 'application/xml' # makes ?format=xml redundant

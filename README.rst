@@ -10,7 +10,7 @@ First time only:
 
 .. code-block:: bash
 
-   $ ./create_db_users.sh
+   $ docker-compose run web python manage.py migrate
 
 Start webpage locally:
 

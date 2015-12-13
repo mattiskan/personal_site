@@ -12,7 +12,7 @@ def transform(xml):
 def index(request):
     feed_html = ''.join(
         etree.tostring(transform(EntryResource.as_xml(request, entry_id=entry.id)))
-        for entry in BlogEntry.objects.all()
+        for entry in BlogEntry.objects.order_by('-id')
     )
     
     return render(request, 'feed.html', context={

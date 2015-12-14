@@ -1,16 +1,24 @@
+from lxml import etree
+
 from django.http import HttpResponse
 from django.shortcuts import render
 
 from blog.models import BlogEntry
+from blog.api import EntryResource
 
+
+
+transform = etree.XSLT(etree.parse('blog/views/xsl/blog_feed.xsl'))
 
 def index(request):
-    entries = ''.join(
-        '<p class="blog-entry">' + entry.title + '</p>'
-        for entry in BlogEntry.objects.all()
+    return HttpResponse(
+        '<!DOCTYPE html><html><body>' +
+        ''.join(
+            etree.tostring(transform(EntryResource.as_xml(request, entry_id=entry.id)))
+            for entry in BlogEntry.objects.all()
+        )
+        + '</body></html>'
     )
-    
-    return HttpResponse('<html><body>' + entries + '</body></html>')
 
 
 def create(request):

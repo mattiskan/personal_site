@@ -1,3 +1,0 @@
-This folder is where database e data is store
-This folder persists between docker restartss.
-If removed between restarts, a database will be wiped

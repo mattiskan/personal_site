@@ -69,6 +69,10 @@ header li.active {
     border-bottom: 4px solid #4cf99d;
 }
 
+header li:hover:not(.active) {
+    border-bottom: 4px solid #ddd;
+}
+
 .blog-entry {
     margin-top: 60px;
 }

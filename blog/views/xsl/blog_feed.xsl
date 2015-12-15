@@ -2,16 +2,19 @@
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-
   <xsl:template match="/">
-    <div>
+    <div class="blog-entry">
       <xsl:apply-templates/>
     </div>
   </xsl:template>
 
   <xsl:template match="object">
-    <a href="{resource_uri}"><h2><xsl:value-of select="id"/>: <xsl:value-of select="title"/></h2></a>
-    <p><xsl:value-of select="content"/></p>
+    <a href="/blog/entry/{id}/">
+      <h2 class="title">
+        <xsl:value-of select="title"/>
+      </h2>
+    </a>
+    <p class="content"><xsl:value-of select="content"/></p>
   </xsl:template>
 
 

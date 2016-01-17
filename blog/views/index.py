@@ -37,7 +37,8 @@ def rss(request):
 def entry(request, entry_id):
     entry_html = etree.tostring(
         transform(
-            EntryResource.as_xml(request, entry_id=entry_id)
+            EntryResource.as_xml(request, entry_id=entry_id),
+            'blog/views/xsl/blog_feed.xsl'
         )
     )
 

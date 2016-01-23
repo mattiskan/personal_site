@@ -1,0 +1,5 @@
+<form action="/blog/subscribe" method="post">
+  {% csrf_token %} 
+  <input id="email address" type="text" name="email_address" hint="your-email-here@example.com"/>
+  <input type="submit" value="Subscribe"/>
+</form>

@@ -36,14 +36,11 @@ def rss(request):
     return HttpResponse(etree.tostring(transformed_xml), content_type='text/xml')
 
 def entry(request, entry_id):
-    entry_html = etree.tostring(
-        transform(
-            EntryResource.as_xml(request, entry_id=entry_id)
-        )
-    )
+    be = BlogEntry.objects.get(pk=entry_id)
 
     return render(request, 'entry.html',context={
-        'entry_html': entry_html,
+        'title': be.title,
+        'entry': be,
     })    
 
 def subscribe(request):

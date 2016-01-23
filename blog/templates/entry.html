@@ -3,7 +3,11 @@
 {% block 'body' %}
   {% include 'header.html'%}
 
-  <div class="container">
-    {{entry_html | safe}}
+<div class="container blog-entry">
+    <h2 class="title">{{entry.title}}</h2>
+    <p class="content">{{entry.content | safe}}</p>
+  </div>
+  <div class="container" style="margin-top: 200px">
+    {% include 'discourse.html' %}
   </div>
 {% endblock %}

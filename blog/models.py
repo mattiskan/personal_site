@@ -6,3 +6,6 @@ class BlogEntry(models.Model):
 
     def __str__(self):
         return self.title
+
+class EmailSubscribers(models.Model):
+	email = models.TextField(max_length=200, unique=True)

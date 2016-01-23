@@ -8,6 +8,7 @@ entry_resource = EntryResource()
 
 urlpatterns = [
     url(r'^$', index.index, name='index'),
+    url(r'^mobile/$', index.mobile, name='mobile'),
     url(r'^create$', index.create, name='create'),
     url(r'^subscribe$', index.subscribe, name='subscribe'),
     url(r'^entry/(?P<entry_id>[0-9]+)/$', index.entry, name='entry'),

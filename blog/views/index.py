@@ -48,8 +48,7 @@ def subscribe(request):
     except IntegrityError:
         return HttpResponse("already subscribed!", status=500)
 
-    email_list = "<br>".join(str(subscriber.email) for subscriber in EmailSubscribers.objects.all())
-    return HttpResponse(email_list)
+    return HttpResponse('Thanks for subscribing!')
 
 
 def create(request):

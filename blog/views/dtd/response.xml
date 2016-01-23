@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE response SYSTEM "/users/hertz/destop/xml/dtd/test.dtd">
+<response>
+	<meta type="hash">
+		<limit type="integer">20</limit>
+		<next type="null"/>
+		<offset type="integer">0</offset>
+		<previous type="null"/>
+		<total_count type="integer">3</total_count>
+	</meta>
+	<objects type="list">
+		<object>
+			<content>TJoho ooo jkfgdslkdsajfldas</content>
+			<id type="integer">14</id>
+			<resource_uri>/blog/api/entry/14/</resource_uri>
+			<title>Hello world</title>
+		</object>
+		<object>
+			<content>This is where all the intelligent stuff goes</content>
+			<id type="integer">15</id>
+			<resource_uri>/blog/api/entry/15/</resource_uri>
+			<title>Clickbait here</title>
+		</object>
+		<object>
+			<content>
+				This text has some "color: red"> in it.
+			</content>
+			<id type="integer">16</id>
+			<resource_uri>/blog/api/entry/16/</resource_uri>
+			<title>HTML-test</title>
+		</object>
+	</objects>
+</response>

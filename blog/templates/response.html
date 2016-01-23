@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block 'body' %}
+  {% include 'header.html'%}
+
+<div class="container">
+  {{message | safe}}
+</div>
+{% endblock %}

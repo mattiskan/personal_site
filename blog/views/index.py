@@ -10,7 +10,6 @@ from blog.models import BlogEntry, EmailSubscribers
 from blog.api import EntryResource
 
 
-
 def transform(xsl):
     def wrap(function):
         def transformed(*args, **kwargs):
@@ -18,6 +17,8 @@ def transform(xsl):
             return HttpResponse(etree.XSLT(etree.parse(xsl))(output))
         return transformed
     return wrap
+
+
 
 def index(request):
     return render(request, 'feed.html', context={
@@ -32,7 +33,6 @@ def mobile(request):
 def rss(request):
     return HttpResponse(Client().get('/blog/api/entry/').content)
 
-@transform('blog/views/xsl/id.xsl')
 def entry(request, entry_id):
     be = BlogEntry.objects.get(pk=entry_id)
 
@@ -41,6 +41,7 @@ def entry(request, entry_id):
         'entry': be,
     })    
 
+@transform('blog/views/xsl/redirect.xsl')
 def subscribe(request):
     new_subscriber = EmailSubscribers(
         email = request.POST['email_address']
@@ -49,14 +50,9 @@ def subscribe(request):
     try:
         new_subscriber.save()
     except IntegrityError:
-        return HttpResponse("already subscribed!", status=500)
+        return render(request, 'response.html', {'message': '<p>You were already subscribed!</p>'})
 
-    return HttpResponse("""
-    <p>Thanks for subscribing!</p>
-    <p>You will be automatically redirected in 3 seconds...</p>
-    <script>window.setTimeout(function(){window.location = '/blog';}, 3000)</script>
-    """)
-
+    return render(request, 'response.html', {'message': '<p>You have subscribed!</p>'})
 
 def create(request):
     new_entry = BlogEntry(

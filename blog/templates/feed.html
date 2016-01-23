@@ -4,8 +4,12 @@
   {% include 'header.html'%}
 
 <div class="container">
-    {{feed_html | safe}}
-  </div>
+  {% for entry in entries %}
+      <a href="/blog/entry/{{entry.id}}/">
+        {% include 'entry_component.html' with entry=entry %}
+      </a>
+  {% endfor %}
 
-{% include 'post.html' %}
+  {% include 'subscribe_form.html' %}
+</div>
 {% endblock %}

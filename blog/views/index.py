@@ -9,32 +9,30 @@ from django.db import IntegrityError
 from blog.models import BlogEntry, EmailSubscribers
 from blog.api import EntryResource
 
-def transform(xml, xsl):
-    return etree.XSLT(etree.parse(xsl))(xml)
+
+
+def transform(xsl):
+    def wrap(function):
+        def transformed(*args, **kwargs):
+            output = etree.fromstring(''.join(function(*args, **kwargs)))
+            return HttpResponse(etree.XSLT(etree.parse(xsl))(output))
+        return transformed
+    return wrap
 
 def index(request):
-    feed_html = ''.join(
-        etree.tostring(
-            transform(
-                EntryResource.as_xml(request, entry_id=entry.id),
-                'blog/views/xsl/blog_feed.xsl'
-            )
-        )
-        for entry in BlogEntry.objects.order_by('-id')
-    )
-    
     return render(request, 'feed.html', context={
-        'feed_html': feed_html,
+        'entries': list(BlogEntry.objects.order_by('-id')),
     })
 
+@transform('blog/views/xsl/mobile.xsl')
+def mobile(request):
+    return index(request)
 
+@transform('blog/views/xsl/rss_feed.xsl')
 def rss(request):
-    rss_xml = etree.fromstring(Client().get('/blog/api/entry/').content)
+    return HttpResponse(Client().get('/blog/api/entry/').content)
 
-    transformed_xml = transform(rss_xml, 'blog/views/xsl/rss_feed.xsl')
-
-    return HttpResponse(etree.tostring(transformed_xml), content_type='text/xml')
-
+@transform('blog/views/xsl/id.xsl')
 def entry(request, entry_id):
     be = BlogEntry.objects.get(pk=entry_id)
 
@@ -53,8 +51,11 @@ def subscribe(request):
     except IntegrityError:
         return HttpResponse("already subscribed!", status=500)
 
-    email_list = "<br>".join(str(subscriber.email) for subscriber in EmailSubscribers.objects.all())
-    return HttpResponse(email_list)
+    return HttpResponse("""
+    <p>Thanks for subscribing!</p>
+    <p>You will be automatically redirected in 3 seconds...</p>
+    <script>window.setTimeout(function(){window.location = '/blog';}, 3000)</script>
+    """)
 
 
 def create(request):

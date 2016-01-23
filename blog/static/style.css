@@ -80,3 +80,7 @@ header li:hover:not(.active) {
     font-size: 30px;
     margin-bottom: 20px;
 }
+
+#discourse-comments {
+    margin-top: 150px;
+}

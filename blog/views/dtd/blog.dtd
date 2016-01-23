@@ -1,0 +1,44 @@
+
+<!ELEMENT response (
+	  meta,
+	  objects
+	  )>
+
+<!ELEMENT meta (
+	  limit,
+	  next,
+	  offset,
+	  previous,
+	  total_count
+	  )>
+
+<!ATTLIST meta type (hash) #IMPLIED>
+
+<!ELEMENT limit (#PCDATA) >
+<!ELEMENT next (#PCDATA) >
+<!ELEMENT offset (#PCDATA) >
+<!ELEMENT previous (#PCDATA) >
+<!ELEMENT total_count (#PCDATA) >
+
+<!ATTLIST limit type (integer) #IMPLIED>
+<!ATTLIST next type (null) #IMPLIED>
+<!ATTLIST offset type (integer) #IMPLIED>
+<!ATTLIST previous type (null) #IMPLIED>
+<!ATTLIST total_count type (integer) #IMPLIED>
+
+
+<!ELEMENT objects (object*) >
+<!ATTLIST objects type (list) #IMPLIED>
+
+<!ELEMENT object (
+	  content,
+	  id,
+	  resource_uri,
+	  title
+	  )>
+
+<!ELEMENT content (#PCDATA) >
+<!ELEMENT id (#PCDATA) >
+<!ATTLIST id type (integer) #IMPLIED>
+<!ELEMENT resource_uri (#PCDATA) >
+<!ELEMENT title (#PCDATA) >

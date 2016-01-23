@@ -5,7 +5,9 @@
 
 <div class="container">
   {% for entry in entries %}
-      {% include 'entry_component.html' with entry=entry %}
+      <a href="/blog/entry/{{entry.id}}/">
+        {% include 'entry_component.html' with entry=entry %}
+      </a>
   {% endfor %}
 
   {% include 'post.html' %}

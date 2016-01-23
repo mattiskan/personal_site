@@ -51,7 +51,11 @@ def subscribe(request):
     except IntegrityError:
         return HttpResponse("already subscribed!", status=500)
 
-    return HttpResponse('Thanks for subscribing!')
+    return HttpResponse("""
+    <p>Thanks for subscribing!</p>
+    <p>You will be automatically redirected in 3 seconds...</p>
+    <script>window.setTimeout(function(){window.location = '/blog';}, 3000)</script>
+    """)
 
 
 def create(request):

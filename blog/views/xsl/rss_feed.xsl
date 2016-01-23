@@ -8,7 +8,7 @@
       <channel>
         <title>Blog RSS</title>
         <description>RSS feed</description>
-        <link>http://192.168.99.100:8000/blog/rss</link>
+        <link>http://blog.mattiskan.se/blog/rss</link>
  
         <xsl:apply-templates/>
 
@@ -25,7 +25,7 @@
             <xsl:value-of select="content"/>
           </description>
           <link>
-            http://192.168.99.100:8000<xsl:value-of select="resource_uri"/>
+            http://blog.mattiskan.se/blog/<xsl:value-of select="resource_uri"/>
           </link>
         </item>
       </xsl:template>

@@ -9,6 +9,7 @@ entry_resource = EntryResource()
 urlpatterns = [
     url(r'^$', index.index, name='index'),
     url(r'^create$', index.create, name='create'),
+    url(r'^subscribe$', index.subscribe, name='subscribe'),
     url(r'^entry/(?P<entry_id>[0-9]+)/$', index.entry, name='entry'),
     url(r'^rss/$', index.rss, name='rss'),
     url(r'^api/', include(entry_resource.urls)),

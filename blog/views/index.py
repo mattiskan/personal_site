@@ -4,8 +4,9 @@ from lxml import etree
 
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.db import IntegrityError
 
-from blog.models import BlogEntry
+from blog.models import BlogEntry, EmailSubscribers
 from blog.api import EntryResource
 
 
@@ -36,6 +37,20 @@ def entry(request, entry_id):
         'title': be.title,
         'entry': be,
     })    
+
+def subscribe(request):
+    new_subscriber = EmailSubscribers(
+        email = request.POST['email_address']
+    )
+
+    try:
+        new_subscriber.save()
+    except IntegrityError:
+        return HttpResponse("already subscribed!", status=500)
+
+    email_list = "<br>".join(str(subscriber.email) for subscriber in EmailSubscribers.objects.all())
+    return HttpResponse(email_list)
+
 
 def create(request):
     new_entry = BlogEntry(

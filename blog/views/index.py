@@ -58,11 +58,3 @@ def subscribe(request):
 
     return render(request, 'response.html', {'message': '<p>You have subscribed!</p>'})
 
-
-def create(request):
-    new_entry = BlogEntry(
-        title = 'test title2',
-        content = 'test content'
-    )
-    new_entry.save()
-    return HttpResponse("New blog entry added!")

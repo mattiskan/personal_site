@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block 'body' %}
+  {% include 'header.html'%}
+
+<div class="container">
+  <form action="{{request.path}}" method="POST">
+    {% csrf_token %}
+
+    {{form}}
+
+    <input class="following" type="submit" value="Post"/>
+  </form>
+</div>
+{% endblock %}

@@ -25,13 +25,16 @@ def index(request):
         'entries': list(BlogEntry.objects.order_by('-id')),
     })
 
+
 @transform('blog/views/xsl/mobile.xsl')
 def mobile(request):
     return index(request)
 
+
 @transform('blog/views/xsl/rss_feed.xsl')
 def rss(request):
     return HttpResponse(Client().get('/blog/api/entry/').content)
+
 
 def entry(request, entry_id):
     be = BlogEntry.objects.get(pk=entry_id)
@@ -40,6 +43,7 @@ def entry(request, entry_id):
         'title': be.title,
         'entry': be,
     })    
+
 
 @transform('blog/views/xsl/redirect.xsl')
 def subscribe(request):
@@ -53,6 +57,7 @@ def subscribe(request):
         return render(request, 'response.html', {'message': '<p>You were already subscribed!</p>'})
 
     return render(request, 'response.html', {'message': '<p>You have subscribed!</p>'})
+
 
 def create(request):
     new_entry = BlogEntry(

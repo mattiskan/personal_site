@@ -4,6 +4,10 @@
       <span id="brackets" class="colortext">[ ]</span>
       <span id="logotext">mattiskan.se</span>
     </a>
+    <form class="pull-right" action="/blog/search" method="GET">
+      {% csrf_token %}
+      <input name="query" type="text" value="{{request.GET.query}}"/>
+    </form>
   </div>
   <ul class="bright container">
     <li class="active"><a href="/blog">Blog</a></li>

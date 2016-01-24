@@ -27,6 +27,10 @@ a {
     width: 100%;
 }
 
+.pull-right {
+    float: right;
+}
+
 .following {
     margin-top: 150px;
 }

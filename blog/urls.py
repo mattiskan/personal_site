@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^mobile/$', index.mobile, name='mobile'),
     url(r'^create/$', edit_entry.create, name='create'),
     url(r'^edit/(?P<entry_id>[0-9]+)/$', edit_entry.edit, name='edit'),
+    url(r'^search$', index.search, name='search'),
     url(r'^subscribe$', index.subscribe, name='subscribe'),
     url(r'^entry/(?P<entry_id>[0-9]+)/$', index.entry, name='entry'),
     url(r'^rss/$', index.rss, name='rss'),

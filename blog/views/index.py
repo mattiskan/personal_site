@@ -42,7 +42,20 @@ def entry(request, entry_id):
     return render(request, 'entry.html',context={
         'title': be.title,
         'entry': be,
-    })    
+    })
+
+
+def search(request):
+    query = request.GET['query']
+    
+    search_results = [
+        be for be in BlogEntry.objects.order_by('-id')
+        if query in be.title + be.content
+    ]
+    
+    return render(request, 'feed.html', context={
+        'entries': search_results,
+    })
 
 
 @transform('blog/views/xsl/redirect.xsl')

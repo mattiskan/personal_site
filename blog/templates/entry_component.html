@@ -10,7 +10,7 @@
     $.ajax({
         url: '/blog/entry/{{entry.id}}/reply-count/',
     }).done(function(res) {
-        $('#reply-count-{{entry.id}}').html(res + ' replies');
+        $('#reply-count-{{entry.id}}').html(res + ' comment(s)');
     });
 
     }, 300);

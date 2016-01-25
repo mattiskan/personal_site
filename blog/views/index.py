@@ -71,7 +71,7 @@ def search(request):
     
     search_results = [
         be for be in BlogEntry.objects.order_by('-id')
-        if query in be.title + be.content
+        if query.lower() in (be.title + be.content).lower()
     ]
     
     return render(request, 'feed.html', context={

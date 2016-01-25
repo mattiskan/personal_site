@@ -1,10 +1,13 @@
+import json
+import urllib2
+import time
 from django.test import Client
 
 from lxml import etree
 from pyquery import PyQuery as pq
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.db import IntegrityError
 
 from blog.models import BlogEntry, EmailSubscribers
@@ -46,10 +49,21 @@ def entry(request, entry_id):
     })
 
 def reply_count(request, entry_id):
-    url = 'http://discourse.mattiskan.se/t/' + entry_id
-    resp = pq(url=url)
-    position = int(resp('span[itemprop=position]')[-1].text[1:])
-    return HttpResponse(str(position - 1))
+    be = get_object_or_404(BlogEntry, id=entry_id)
+    url = 'http://discourse.mattiskan.se/c/blog.json'
+
+    category = json.loads(urllib2.urlopen(url).read())
+
+    for topic in category['topic_list']['topics']:        
+        topic_data = json.loads(urllib2.urlopen(
+            'http://discourse.mattiskan.se/t/%d.json' % topic['id']
+        ).read())['details']
+
+        
+        if 'links' in topic_data:
+            if topic_data['links'][0]['url'][-4:] == '/%s/' % entry_id:
+                return HttpResponse(int(topic['posts_count']) - 1)
+        time.sleep(0.5)
 
 
 def search(request):

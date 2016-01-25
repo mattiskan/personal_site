@@ -1,7 +1,7 @@
 <div class="blog-entry">
   <h2 class="title">{{entry.title}}</h2>
-  <p id="reply-count-{{entry.id}}"></p>
-  <p class="content">{{entry.content | safe}}</p>p
+  <span id="reply-count-{{entry.id}}" class="smaller"></span>
+  <p class="content">{{entry.content | safe}}</p>
 
 
   <script type="text/javascript">
@@ -10,12 +10,10 @@
     $.ajax({
         url: '/blog/entry/{{entry.id}}/reply-count/',
     }).done(function(res) {
-    $('#reply-count-{{entry.id}}').html(res + ' replies');
-        console.log(res);
-    })
+        $('#reply-count-{{entry.id}}').html(res + ' replies');
+    });
 
-    }, 100);
-
+    }, 300);
 
   </script>
 </div>

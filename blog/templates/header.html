@@ -5,7 +5,6 @@
       <span id="logotext">mattiskan.se</span>
     </a>
     <form class="pull-right" action="/blog/search" method="GET">
-      {% csrf_token %}
       <input name="query" type="text" value="{{request.GET.query}}"/>
     </form>
   </div>

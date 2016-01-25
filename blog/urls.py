@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^search$', index.search, name='search'),
     url(r'^subscribe$', index.subscribe, name='subscribe'),
     url(r'^entry/(?P<entry_id>[0-9]+)/$', index.entry, name='entry'),
+    url(r'^entry/(?P<entry_id>[0-9]+)/reply-count/$', index.reply_count, name='reply_count'),
     url(r'^rss/$', index.rss, name='rss'),
     url(r'^api/', include(entry_resource.urls)),
 ]

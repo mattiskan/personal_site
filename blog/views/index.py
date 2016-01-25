@@ -1,6 +1,7 @@
 from django.test import Client
 
 from lxml import etree
+from pyquery import PyQuery as pq
 
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -43,6 +44,12 @@ def entry(request, entry_id):
         'title': be.title,
         'entry': be,
     })
+
+def reply_count(request, entry_id):
+    url = 'http://discourse.mattiskan.se/t/' + entry_id
+    resp = pq(url=url)
+    position = int(resp('span[itemprop=position]')[-1].text[1:])
+    return HttpResponse(str(position - 1))
 
 
 def search(request):

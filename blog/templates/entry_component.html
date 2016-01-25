@@ -1,4 +1,21 @@
 <div class="blog-entry">
-    <h2 class="title">{{entry.title}}</h2>
-    <p class="content">{{entry.content | safe}}</p>
+  <h2 class="title">{{entry.title}}</h2>
+  <p id="reply-count-{{entry.id}}"></p>
+  <p class="content">{{entry.content | safe}}</p>p
+
+
+  <script type="text/javascript">
+    window.setTimeout(function() {
+
+    $.ajax({
+        url: '/blog/entry/{{entry.id}}/reply-count/',
+    }).done(function(res) {
+    $('#reply-count-{{entry.id}}').html(res + ' replies');
+        console.log(res);
+    })
+
+    }, 100);
+
+
+  </script>
 </div>
